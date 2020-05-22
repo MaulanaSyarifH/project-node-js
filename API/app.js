@@ -1,25 +1,11 @@
-const https = require('https');
 
-const options = {
-    hostname: 'api.github.com',
-    port: 443,
-    path: '/users/MaulanaSyarifH',
-    method: 'GET',
-    headers:{
-        'user-agent': 'mol'
-    }
-  };
+const profile = require('./profile.js');
 
 
-let req = https.request(options, (res) => {
+let users = process.argv.slice(2);
 
-    console.log('statusCode:', res.statusCode);
-    console.log('headers:', res.headers);
-
+users.map(user => {
+    return profile.get(user);
 })
 
-req.end();
 
-req.on('error', (e) => {
-    console.error(e);
-})
